@@ -116,7 +116,7 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
     static uint32_t last_heartbeat_time = 0;
-    if (HAL_GetTick() - last_heartbeat_time >= 500) 
+    if (HAL_GetTick() - last_heartbeat_time >= 1000) 
     {
       HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin); 
       last_heartbeat_time = HAL_GetTick();
@@ -126,11 +126,12 @@ int main(void)
 
       HAL_GPIO_WritePin(LED_EXT_GPIO_Port, LED_EXT_Pin, GPIO_PIN_SET); 
 
+      HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
 
-      led_ext_off_time = HAL_GetTick() + 3000;
+      led_ext_off_time = HAL_GetTick() + 1500;
 
 
-      sprintf(tx_buffer, "Boton B1 presionado! LED EXT ON.\r\n");
+      sprintf(tx_buffer, "Usted A Presionado El Botón! LED EXT ON.\r\n");
       HAL_UART_Transmit(&huart2, (uint8_t*)tx_buffer, strlen(tx_buffer), 100);
 
 
